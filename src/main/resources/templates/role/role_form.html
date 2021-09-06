@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+
+<section class="container mt-5">
+    <h1 th:if="${role.id == null}">Add Role</h1>
+    <h1 th:unless="${role.id == null}">Edit Role</h1>
+    <hr>
+
+    <form th:action="@{/roles/save}" method="post" th:object="${role}">
+        <input type="hidden" th:field="*{id}">
+        <div class="mb-3">
+            <label for="name">Name</label>
+            <input type="text" th:field="*{name}" id="name" placeholder="Role Name" required
+                   class="form-control col-4">
+        </div>
+        <div>
+            <label for="users"></label>
+            <select th:field="*{users}" id="users" class="form-control col-4" multiple="multiple">
+                <option th:value="null"
+                        th:text="None">
+                </option>
+
+                <option th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.username}">
+                </option>
+
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+    </form>
+</section>
+
+
+</body>
+
+</body>
+</html>

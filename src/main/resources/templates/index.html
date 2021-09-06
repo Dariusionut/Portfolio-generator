@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="30">
+    <title>[[${title}]] Portfolio Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" th:href="@{/css/welcome.css}">
+    <link rel="stylesheet" th:href="@{css/style.css}">
+</head>
+<body>
+<div class="banner-text">
+    <ul class="f-right" >
+        <li><i class="fas fa-home"></i></li>
+
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/users}">USERS</a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/roles}">ROLES</a></li>
+        <li sec:authorize="isAuthenticated()">Portfolio</li>
+        <li>Contact</li>
+    </ul>
+
+
+
+
+    <h2 sec:authorize="isAnonymous()" th:text="${welcome}"></h2>
+
+        <h2 sec:authorize="isAuthenticated()" th:text="${welcome} + ', ' + ${#httpServletRequest.remoteUser} + '!' " id="welcome">!</h2>
+
+    <ul class="center white-text">
+        <li sec:authorize="isAnonymous()"><a th:href="@{/login}">login</a></li>
+        <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Register</a> </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}" onclick="if (!(confirm('Are you sure to log out?'))) return false">
+                logout</a></li>
+    </ul>
+
+</div>
+<div class="animation-area">
+    <ul class="box-area">
+        <li class="fab fa-java fa-8x"></li>
+        <li class="fab fa-angular fa-10x"></li>
+        <li class="fab fa-html5 fa-6x"></li>
+        <li class="fas fa-database fa-7x"></li>
+        <li class="fab fa-bootstrap fa-5x"></li>
+        <li class="fab fa-css3-alt fa-6x"></li>
+    </ul>
+</div>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

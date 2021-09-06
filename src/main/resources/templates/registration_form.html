@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]] - Portfolio Generator</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/css/welcome.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+<div class="banner-text">
+    <ul class="f-right">
+        <li><a th:href="@{/}"><i class="fas fa-home"></i></a></li>
+
+        <li sec:authorize="isAuthenticated()"><a th:href="@{/users}">USERS</a></li>
+        <li>About</li>
+        <li>Portfolio</li>
+        <li>Contact</li>
+    </ul>
+
+    <section class="container mt-5">
+        <h1 th:if="${user.id == null}">Register</h1>
+        <h1 th:unless="${user.id == null}">Edit User</h1>
+        <hr>
+
+        <form th:action="@{/save}" method="post" th:object="${user}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}">
+            <div class="mb-3">
+                <label for="username">Username</label>
+                <input type="text" th:field="*{username}" id="username" placeholder="Username" required
+                       class="form-control col-4">
+            </div>
+
+
+            <div class="mb-3">
+                <label for="fName">First Name</label>
+                <input type="text" th:field="*{firstName}" id="fName" placeholder="First Name" autocomplete="off"
+                       required="" class="form-control col-4">
+            </div>
+            <div class="mb-3">
+                <label for="lName">Last Name</label>
+                <input type="text" th:field="*{lastName}" id="lName" placeholder="Last Name" autocomplete="off"
+                       required="" class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Email</label>
+                <input type="email" th:field="*{email}" id="email" placeholder="Email" required
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="pNr">Phone</label>
+                <input type="text" th:field="*{phoneNumber}" id="pNr" placeholder="Phone Number" required minlength="10", maxlength="11"
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3" th:if="${user.id == null}">
+                <label for="pass">Password</label>
+                <input type="password" th:field="*{password}" id="pass" placeholder="Password"
+                       class="form-control col-4" required>
+            </div>
+            <div class="mb-3" th:unless="${user.id == null}">
+                <label for="passs">Password</label>
+                <input type="password" th:field="*{password}" id="passs" placeholder="Password"
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="profile">Profile Photo</label>
+                <input type="file" name="image" id="profile" accept="image/png, image/jpeg"
+                       class="form-control col-4" required>
+            </div>
+
+            <th:block th:if="${user.id != null}">
+                <div class="mb-3">
+                    <label for="det">Details</label>
+                    <textarea type="text" th:field="*{userDetails.info}" id="det" placeholder="Details" maxlength="200"
+                              class="form-control col-4"> </textarea>
+                </div>
+
+                <input type="hidden" th:field="*{roles}" th:value="${user.getRoles()}">
+            </th:block>
+
+            <th:block th:if="${user.id == null}">
+                 <input type="hidden" th:field="*{userDetails.info}"  placeholder="Details" maxlength="200"
+                           class="form-control col-4"> </input>
+
+                <input type="text" th:each="role : ${user.roles}" th:field="*{roles}" th:value="${role.setId(1)}">
+
+            </th:block>
+
+            <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+        </form>
+    </section>
+
+</div>
+
+
+<section class="animation-area">
+    <ul class="box-area">
+        <li class="fab fa-java fa-8x"></li>
+        <li class="fab fa-angular fa-10x"></li>
+        <li class="fab fa-html5 fa-6x"></li>
+        <li class="fas fa-database fa-7x"></li>
+        <li class="fab fa-bootstrap fa-5x"></li>
+        <li class="fab fa-css3-alt fa-6x"></li>
+    </ul>
+</section>
+
+</body>
+</html>

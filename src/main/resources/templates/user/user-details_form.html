@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <input type="hidden" th:field="*{user.id}">
+    <title>[[${user.username}]]'s profile - Portfolio Generator</title>
+    <!--    Bootstrap styles-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--    Font awesome-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <!--    Bootstrap Scripts-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+
+<section>
+    <input type="hidden" th:field="*{user.id}">
+    <section class="user-details">
+        <section class="container p-5">
+    <span>
+        <img th:src="${user.getPhotosImagePath()}"></img>
+        <span style="display: inline-block">
+        <ul>
+            <li><b>User name: </b> [[${user.username}]]</li>
+            <li><b>Full name: </b> [[${user.fullName}]]</li>
+            <li><b>User Role:</b>
+                <span th:if="${user.roles.size() > 1}" th:each="role : ${user.roles}">[[${role.name + "; "}]]</span>
+                <span th:if="${user.roles.size() == 1}" th:each="role : ${user.roles}">[[${role.name}]]</span>
+            </li>
+            <li th:if="${user.userDetails == null}" style="color: red">Please complete your profile details!</li>
+        </ul>
+</span>
+    </span>
+        </section>
+    </section>
+    <section class="container mt-5">
+        <h1 th:if="${user.id == null}">Register</h1>
+        <h1 th:unless="${user.id == null}">Edit User</h1>
+        <hr>
+
+        <form th:action="@{/save}" method="post" th:object="${user}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}">
+            <div class="mb-3">
+                <label for="username">Username</label>
+                <input type="text" th:field="*{username}" id="username" placeholder="Username" required
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Email</label>
+                <input type="email" th:field="*{email}" id="email" placeholder="Email" required
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="fName">First Name</label>
+                <input type="text" th:field="*{firstName}" id="fName" placeholder="First Name" autocomplete="off"
+                       required="" class="form-control col-4">
+            </div>
+            <div class="mb-3">
+                <label for="lName">Last Name</label>
+                <input type="text" th:field="*{lastName}" id="lName" placeholder="Last Name" autocomplete="off"
+                       required="" class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="pass">Password</label>
+                <input type="password" th:field="*{password}" id="pass" placeholder="Password" required
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3" th:if="${user.id == null}">
+                <label for="profile">Profile Photo</label>
+                <input type="file" name="image" id="profile" accept="image/png, image/jpeg"
+                       class="form-control col-4">
+            </div>
+
+            <th:block th:unless="${user.id == null}">
+                <input type="file" name="image" accept="image/png, image/jpeg" th:value="${user.getPhotosImagePath()}">
+
+            </th:block>
+
+            <div class="mb-3">
+                <label for="pNr">Phone</label>
+                <input type="text" th:field="*{userDetails.phoneNumber}" id="pNr" placeholder="Phone"
+                       class="form-control col-4">
+            </div>
+
+            <div class="mb-3">
+                <label for="det">Details</label>
+                <textarea type="text" th:field="*{userDetails.info}" id="det" placeholder="Details" maxlength="200"
+                          class="form-control col-4"> </textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg">SAVE</button>
+        </form>
+    </section>
+</section>
+
+</section>
+
+</body>
+</html>

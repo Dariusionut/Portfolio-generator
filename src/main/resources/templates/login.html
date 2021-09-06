@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${title}]] - Portfolio Generator</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/css/welcome.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+
+<div class="banner-text">
+    <ul class="f-right">
+        <li><a th:href="@{/}"><i class="fas fa-home"></i></a></li>
+
+        <li><a th:href="@{#}">USERS</a></li>
+        <li>About</li>
+        <li>Portfolio</li>
+        <li>Contact</li>
+    </ul>
+
+    <div class="container center">
+        <form class="form-signin" method="post" action="/login">
+            <h2 class="form-signin-heading">Please login</h2>
+            <p>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" name="email" class="form-control" placeholder="Username" required autofocus>
+            </p>
+            <p>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            </p>
+<!--            <input name="_csrf" type="hidden" value="09c0a6aa-9446-4b45-810a-a1a4dd1507b6" />-->
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+    </div>
+
+</div>
+
+
+<section class="animation-area">
+    <ul class="box-area">
+        <li class="fab fa-java fa-8x"></li>
+        <li class="fab fa-angular fa-10x"></li>
+        <li class="fab fa-html5 fa-6x"></li>
+        <li class="fas fa-database fa-7x"></li>
+        <li class="fab fa-bootstrap fa-5x"></li>
+        <li class="fab fa-css3-alt fa-6x"></li>
+    </ul>
+</section>
+
+</body>
+</html>

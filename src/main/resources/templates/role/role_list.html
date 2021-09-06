@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+
+<section class="container">
+    <h3>Users</h3>
+    <hr>
+
+    <section>
+        <a th:href="@{/roles/add}" class="btn btn-primary btn-sm mb-3 mr-5">ADD ROLE</a>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+            <th>Id</th>
+            <th>Name</th>
+            <th>Users</th>
+            <th>Action</th>
+            </thead>
+            <tbody>
+            <tr th:each="role : ${roles}">
+                <td th:text="${role.id}"></td>
+                <td th:text="${role.name}"></td>
+                <td>
+
+                    <p th:text="None" th:if="${role.users.isEmpty()}"></p>
+
+                    <th:block th:unless="${role.users.isEmpty()}" th:each="user : ${role.users}">
+                        <span th:text="${user.username} + '; '"></span>
+
+                    </th:block>
+                </td>
+                </td>
+                <td>
+                    <a th:href="@{'/roles/edit/' + ${role.id}}" class="btn btn-success"><i
+                            class="fas fa-edit"></i></a>
+
+                    <a th:href="@{'/roles/delete/' + ${role.id}}" class="btn btn-danger"
+                       onclick="if (!(confirm('Are you sure to delete this role?'))) return false"><i
+                            class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+</body>
+</html>

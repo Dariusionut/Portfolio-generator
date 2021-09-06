@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/main :: head}"></head>
+<body>
+<header th:replace="~{fragments/main :: header}"></header>
+
+<section class="container">
+    <h3>Users</h3>
+    <hr>
+    <form th:action="@{/users/search}" class="form-inline">
+
+        <input class="form-control mr-sm-2 mb-3" type="search" name="userName" placeholder="Search by name"/>
+
+        <button class="btn btn-success mb-3" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    <section>
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+            <th>Id</th>
+            <th>Img</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Role(s)</th>
+            <th sec:authorize="permitAll()">Action</th>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td>
+                    <img th:src="${user.getPhotosImagePath()}" style="height: 50px; border-radius: 50%"/>
+                </td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.firstName}"></td>
+                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <th:block>
+                        <p th:if="${user.roles.isEmpty()}" th:text="None"></p>
+                        <th:block th:each="role : ${user.roles}">
+                            <th:block th:unless="${user.roles.isEmpty()}" >
+                                <span th:if="${user.roles.size() == 1}" th:text="${role.name}"></span>
+                                <span th:if="${user.roles.size() > 1}" th:text="${role.name + '; '}"></span>
+                            </th:block>
+                        </th:block>
+                    </th:block>
+                </td>
+                <td sec:authorize="permitAll()">
+                    <a sec:authorize="permitAll()" th:href="@{'/users/portfolio/' + ${user.id}}" target="_blank" class="btn btn-info"><i class="fas fa-address-card"></i></a>
+                    <a sec:authorize="permitAll()" th:href="@{'/users/profile/' + ${user.id}}" class="btn btn-info"><i class="fas fa-user"></i></a>
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/users/edit/' + ${user.id}}" class="btn btn-success"><i
+                            class="fas fa-edit"></i></a>
+
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/users/delete/' + ${user.id}}" class="btn btn-danger"
+                       onclick="if (!(confirm('Are you sure to delete this user?'))) return false"><i
+                            class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</section>
+
+</body>
+</html>

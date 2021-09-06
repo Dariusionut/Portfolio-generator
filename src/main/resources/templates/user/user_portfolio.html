@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My portofolio</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/portfolio.css}">
+    <!-- <link rel="stylesheet" href="reset.css"> -->
+
+</head>
+
+<body th:object="${user}">
+<input type="hidden" th:field="*{id}">
+<header>
+    <a class="logo" href="#">
+        <img th:src="${user.getPhotosImagePath()}" alt="logo">
+    </a>
+    <nav class="navigation">
+        <a href="#section-1">
+            Passions
+        </a>
+        <a href="#section-2">
+            Portofolio
+        </a>
+        <a href="#section-3">
+            References
+        </a>
+        <a href="#section-4">
+            About me
+        </a>
+        <a href="#section-5">
+            Contact
+        </a>
+    </nav>
+
+</header>
+
+<section class="hero section-block" >
+    <div>
+        <h1 >[[${user.fullName}]]'s portofolio!</h1>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. <br>
+            It has survived not only five centuries, but also the leap into electronic typesetting, <br>
+            remaining essentially unchanged.
+        </p>
+    </div>
+</section>
+
+<section id="section-1" class="section-block grey my-passions not-fullscreen">
+    <h2>My passions</h2>
+
+    <div class="grid clearfix my-passions-inner-container">
+
+        <div class="grid-box box-third">
+            <h3>Passion 1</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+        </div>
+
+        <div class="grid-box box-third">
+            <h3>Passion 2</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+
+        </div>
+
+        <div class="grid-box box-third">
+            <h3>Passion 3</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="section-2" class="section-block lilla my-portofolio not-fullscreen">
+    <h2>My projects</h2>
+
+    <div class="grid clearfix my-portofolio-inner-container">
+
+        <div class="grid-box box-third">
+            <h3>Project 1</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+        </div>
+
+        <div class="grid-box box-third">
+            <h3>Project 2</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+
+        </div>
+
+        <div class="grid-box box-third">
+            <h3>Project 3</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <br>
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br>
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="section-3" class="section-block grey not-fullscreen rec-section">
+    <h2>References</h2>
+
+    <div class="grid clearfix">
+
+        <div class="grid-box box-half rec-section-box">
+            <img src="images\Daniel Dines.jpg" alt="Profile picture">
+            <div>
+                <h3>Daniel Solomon Dines</h3>
+                <p>Daniel Solomon Dines (n. ianuarie 1972, Oneşti, Bacău, România) <br>
+                    este un antreprenor român, actualmente cel mai bogat om din România. <br>
+                    Este cofondator al companiei UiPath.
+                </p>
+            </div>
+
+
+        </div>
+
+        <div class="grid-box box-half rec-section-box">
+            <img src="images\Ramon Nastase.jpg" alt="Profile picture">
+            <div>
+                <h3>Ramon Nastase</h3>
+                <p>Trainer, autor si fondatorul companiei care se axeaza pe formarea si <br>
+                    training-ul persoanelor care vor sa-si inceapa o cariera in domeniul IT.
+                </p>
+            </div>
+
+
+        </div>
+
+        <div class="grid-box box-half rec-section-box">
+            <img src="images\SDA.jpg" alt="Profile picture">
+            <div>
+                <h3>Software Development Academy</h3>
+                <p>Software Development Academy are peste 3 ani de experiență în predarea <br>
+                    programării de la zero. Suntem specializați în cursuri Java și suntem <br>
+                    cea mai prestigioasă academie de programare din Polonia. Toți cei peste <br>
+                    200 de formatori sunt programatori activi, astfel încât să puteți fi <br>
+                    siguri că în cea mai mare parte din timpul cursului veți face o practică utilă.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="section-4" class="section-block lilla about-me">
+    <h2>About me</h2>
+    <div class="about-me-inner-container">
+        <img th:src="${user.getPhotosImagePath()}" alt="My photo">
+        <div>
+            <h2>Hello, my name is [[${user.fullName}]]!</h2>
+            <p th:if="${user.userDetails == null}" style="font-size: 25px; color: red" >Please fill up your details!</p>
+            <p th:unless="${user.userDetails == null}" th:text="${user.userDetails.info}" style="font-size: 25px; max-width: 700px"></p>
+
+        </div>
+    </div>
+
+
+</section>
+
+<footer id="section-5" class="section-block grey not-fullscreen">
+    <h3>Contact</h3>
+    <address>
+        Str. Calea Pucioasei, <br>
+        nr.60A <br>
+        Sotanga, Dambovita, Romania
+    </address>
+
+    <a th:href="${'tel:0' + user.phoneNumber}">0[[${user.phoneNumber}]]</a>
+    <a th:href="${'mailto:' + user.email}">[[${user.email}]]</a>
+</footer>
+</body>
+
+</html>
